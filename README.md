@@ -1,4 +1,4 @@
-### `online-voting-backend`
+## Online-voting-backend
 This is the backend of online-voting site. This server runs on localost at port 3001, i.e. http://localhost:3001 For database it uses MonogDB Atlas, an online MonogoDB Solutions.
 
 ## Available Scripts
