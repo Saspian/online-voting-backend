@@ -14,6 +14,7 @@ mongoose.set('useUnifiedTopology', true);
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 const participantsRoute = require('./routes/participants');
+const adminRoute = require('./routes/admin');
 
 require('dotenv/config');
 
@@ -50,6 +51,7 @@ app.use(cors());
 app.use('/api/user', authRoute);
 app.use('/api/post',postRoute);
 app.use('/api/participants',participantsRoute);
+app.use('/api/admin',adminRoute)
 
 
 //starting server
