@@ -46,6 +46,10 @@ const contentSchema = new mongoose.Schema({
         type: Array,
         default: [],
         required: false
+    },
+    createdAt:  {
+        type: Date, 
+        default: Date.now 
     }
 });
 
