@@ -43,6 +43,24 @@ router.get('/registeredparticipants/:participantsId', async (req, res)=>{
     }
 });
 
+//SEARCHING THE DATABSE
+router.get('/search', async (req,res)=>{
+    try{
+        const query = req.query.q;
+        const results = await Content.find({ 
+            pName : query
+        });
+        res.json(results); 
+    } 
+    catch(err){
+        const errMsg = {
+            message: 'Project not found',
+            error: err
+        }
+        res.json(errMsg);
+    }  
+    })
+
 //UPDATING VOTE COUNTER
 router.post('/registeredparticipants/:participantsId', async (req, res) =>{
     try{
