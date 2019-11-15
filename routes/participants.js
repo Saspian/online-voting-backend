@@ -23,15 +23,34 @@ router.post('/registerparticipants', async (req, res) => {
     }
 });
 
-//DISPLAYING OR GETTING PARTICPANTS INFO
-router.get('/registeredparticipants', async (req, res)=>{
-    try{
-        const contents = await Content.find();
-        res.json(contents);
-    }catch(err){
-        res.json({message : err});
+//SEARCHING THE DATABSE
+router.get('/registeredparticipants', async (req,res)=>{
+    if(req.query.q){
+        try{
+            const name = req.query.q;
+            const exp = new RegExp(name, "i");
+            const results = await Content.find({ 
+                pName : exp
+            });
+            res.json(results); 
+        }catch(err){
+            const errMsg = {
+                message: 'Project not found',
+                error: err
+            }
+            res.json(errMsg);
+        } 
     }
-});
+    else{
+        try{
+            const contents = await Content.find();
+            res.json(contents);
+        }catch(err){
+            res.json({message : err});
+        }
+    }     
+    })
+
 
 //GETTING ITEMS WITH SPECIFIC ID
 router.get('/registeredparticipants/:participantsId', async (req, res)=>{
@@ -43,23 +62,6 @@ router.get('/registeredparticipants/:participantsId', async (req, res)=>{
     }
 });
 
-//SEARCHING THE DATABSE
-router.get('/search', async (req,res)=>{
-    try{
-        const query = req.query.q;
-        const results = await Content.find({ 
-            pName : query
-        });
-        res.json(results); 
-    } 
-    catch(err){
-        const errMsg = {
-            message: 'Project not found',
-            error: err
-        }
-        res.json(errMsg);
-    }  
-    })
 
 //UPDATING VOTE COUNTER
 router.post('/registeredparticipants/:participantsId', async (req, res) =>{
