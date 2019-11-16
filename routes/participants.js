@@ -27,8 +27,7 @@ router.post('/registerparticipants', async (req, res) => {
 router.get('/registeredparticipants', async (req,res)=>{
     if(req.query.q){
         try{
-            const name = req.query.q;
-            const exp = new RegExp(name, "i");
+            const exp = new RegExp(rq.query.q, "i");
             const results = await Content.find({ 
                 pName : exp
             });
